@@ -1,11 +1,10 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from 'api';
 import { LoginPayload, PasswordRecoveryPayload, User } from 'interfaces/api/profile.interfaces';
-import { ErrorType } from 'interfaces/common.interfaces';
 import { setAxiosAuthorizationToken } from 'utils/axios';
 import storage from 'utils/storage';
 
-export const login = createAsyncThunk<string, LoginPayload, { rejectValue: ErrorType }>(
+export const login = createAsyncThunk<string, LoginPayload, { rejectValue: string }>(
   'LOGIN',
   async (loginData, { rejectWithValue }) => {
     const { data, errorMessage } = await api.auth.login(loginData);

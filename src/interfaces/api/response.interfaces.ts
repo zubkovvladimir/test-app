@@ -1,5 +1,3 @@
-import { ErrorType } from 'interfaces/common.interfaces';
-
 export type SortDirection = 'ascend' | 'descend';
 
 export interface PageSorter {
@@ -23,13 +21,13 @@ export interface PageMeta {
 }
 
 export interface IEmptyResponse {
-  errorMessage?: ErrorType;
+  errorMessage?: string;
   success?: boolean;
 }
 
 export interface IResponse<T> {
   success?: boolean;
-  errorMessage?: ErrorType;
+  errorMessage?: string;
   data?: T;
 }
 
@@ -40,7 +38,7 @@ export interface ReturnFetchAll<T> {
 
 export interface IResponseAll<T> {
   success?: boolean;
-  errorMessage?: ErrorType;
+  errorMessage?: string;
   data?: T[];
 }
 

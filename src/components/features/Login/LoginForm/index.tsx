@@ -15,6 +15,7 @@ import { loginSchema } from 'utils/validations';
 import classes from './LoginPageForm.module.scss';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { Preloader } from 'components/shared/Preloader';
+import { errorsDicts } from 'constants/errors';
 
 const { Title } = Typography;
 const { Password } = Input;
@@ -24,12 +25,13 @@ export const LoginForm: FC = () => {
   const navigate = useNavigate();
 
   const isLoading = useTypedSelector((state) => state.profile.isLoading);
-  // const authError = useTypedSelector((state) => state.profile.error);
+  const authError = useTypedSelector((state) => state.profile.error);
 
   const { control, handleSubmit, watch } = useForm<LoginPayload>({
     resolver: yupResolver(loginSchema),
   });
   // const watchLoginData = watch(['password', 'username']);
+  const authErrorMessage = authError ? errorsDicts[authError] : null;
 
   const onSubmit: SubmitHandler<LoginPayload> = (form) => {
     dispatch(login(form));
@@ -60,7 +62,7 @@ export const LoginForm: FC = () => {
         control={control}
         name="password"
         render={({ field, fieldState: { error } }) => (
-          <FormItem errorMessage={error?.message} name="Пароль">
+          <FormItem errorMessage={error?.message || authErrorMessage} name="Пароль">
             <Password size="large" type="password" {...field} />
           </FormItem>
         )}

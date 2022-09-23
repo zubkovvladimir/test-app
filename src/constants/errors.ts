@@ -10,6 +10,11 @@ export enum ApiErrors {
 }
 
 export const errorsDicts: Record<string, string> = {
-  'The user credentials were incorrect.': 'Логин, почта или пароль были введены неверно',
+  'Incorrect email or password': 'Логин, почта или пароль были введены неверно',
   'The login has already been taken.': 'Этот логин уже занят',
+};
+
+export const ErrorsCode: Record<number, string> = {
+  404: 'Удаленный ресурс не найден',
+  422: 'Проверьте правильность передаваемых значений',
 };

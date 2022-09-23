@@ -1,13 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { User } from 'interfaces/api/profile.interfaces';
-import { ErrorType } from 'interfaces/common.interfaces';
 import { login, setIsLoggedIn } from 'store/profile/actions';
 import { createBuilder } from 'utils/store';
 
 interface ProfileState {
   isLoggedIn: boolean;
   isLoading: boolean;
-  error: ErrorType | null;
+  error: string | null;
   info: User | null;
   isLinkSended: boolean;
 }
@@ -28,7 +27,10 @@ export const profileReducer = createReducer(initialState, (builder) => {
     .addCase(login.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.isLoggedIn = false;
-      state.error = payload as ErrorType;
+
+      if (payload) {
+        state.error = payload;
+      }
     })
     .addCase(login.fulfilled, (state) => {
       state.isLoading = false;

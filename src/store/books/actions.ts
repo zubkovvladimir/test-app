@@ -2,10 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from 'api';
 import { Book } from 'interfaces/api/books.interface';
 import { ParamsFetchAll, ReturnFetchAll } from 'interfaces/api/response.interfaces';
-import { ErrorType } from 'interfaces/common.interfaces';
 
-export const fetchBooks = createAsyncThunk<Book[], ParamsFetchAll, { rejectValue: ErrorType }>(
-  'FETCH_GOODS',
+export const fetchBooks = createAsyncThunk<Book[], ParamsFetchAll, { rejectValue: string }>(
+  'FETCH_BOOKS',
   async (params, { rejectWithValue }) => {
     const { data, errorMessage } = await api.books.getList(params);
 
