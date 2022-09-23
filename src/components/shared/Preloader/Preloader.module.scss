@@ -1,0 +1,31 @@
+.white {
+  svg {
+    color: white;
+  }
+}
+
+.darkBlue {
+  svg {
+    color: white;
+  }
+}
+
+.preloader {
+  width: 100%;
+
+  &.block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.page {
+    text-align: center;
+    line-height: 200px;
+  }
+
+  &.fullPage {
+    text-align: center;
+    line-height: 70vh;
+  }
+}

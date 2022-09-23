@@ -1,0 +1,18 @@
+@import 'assets/scss/variables';
+
+.input-name {
+  margin-bottom: 8px;
+}
+
+.input-name-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  color: $gray;
+
+  &:hover {
+    color: $gray;
+  }
+}

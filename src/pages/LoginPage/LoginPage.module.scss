@@ -1,0 +1,24 @@
+@import 'assets/scss/variables';
+
+.form {
+  background-color: #fff;
+  padding: 22px 24px;
+  border-radius: $radius-big;
+}
+
+.input-name {
+  margin-bottom: 8px;
+}
+
+.input-name-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  color: $gray;
+
+  &:hover {
+    color: $gray;
+  }
+}
