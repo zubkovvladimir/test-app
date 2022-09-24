@@ -24,17 +24,23 @@ import { PageTitle } from 'components/shared/PageTitle';
 // import { Table } from './Table';
 import { appName } from 'constants/app';
 import { fetchContacts } from 'store/contacts/actions';
+import { useTypedSelector } from 'hooks/useTypedSelector';
+import { useModal } from 'hooks/useModal';
+import { Contact } from 'interfaces/api/contacts.interface';
 
 const ContactsPage: React.FC = () => {
   // const [id, setId] = React.useState<number>(SHOP_ITEM_MODAL_DEFAULT_ID);
   const dispatch = useDispatch();
   const outlet = useOutlet();
+  const [isOpen, onOpen, onClose, filterItem] = useModal<Contact>({});
   // const isLoading = useSelector(selectShopItemsIsLoading);
   // const shopItems = useSelector(selectShopItems);
   // const pageMeta = useSelector(selectShopPageMeta);
   // const open = useSelector(selectCreateShopItemModalIsOpen);
 
-  // const debouncedSearch = useDebounceFn((value: string) => dispatch(setShopPageSearchQuery(value)), { wait: 300 });
+  const { isLoading } = useTypedSelector((state) => state.contacts);
+
+  const debouncedSearch = useDebounceFn((value: string) => console.log('sdsd'), { wait: 300 });
 
   // const onCloseModal = () => {
   //   setId(SHOP_ITEM_MODAL_DEFAULT_ID);
@@ -67,16 +73,16 @@ const ContactsPage: React.FC = () => {
     <div>
       <PageTitle>Контакты</PageTitle>
 
-      {/* <PageHeader
+      <PageHeader
         isLoading={isLoading}
         onResetFilter={() => {}}
         onSearch={debouncedSearch.run}
         renderButton={
-          <Button onClick={() => dispatch(openShopItemModal())} type="primary">
+          <Button onClick={() => dispatch(onOpen())} type="primary">
             Добавить
           </Button>
         }
-      /> */}
+      />
 
       {/* <Table data={shopItems} isLoading={isLoading} meta={pageMeta} onEdit={onEdit} />
 
