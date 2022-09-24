@@ -7,7 +7,7 @@ const AuthLayout = lazy(() => import(/* webpackChunkName: "auth'" */ 'layouts/Au
 const MainLayout = lazy(() => import(/* webpackChunkName: "main'" */ 'layouts/MainLayout'));
 
 const LoginPage = lazy(() => import(/* webpackChunkName: "auth'" */ 'pages/LoginPage'));
-const BooksPage = lazy(() => import(/* webpackChunkName: "books'" */ 'pages/BooksPage'));
+const ContactsPage = lazy(() => import(/* webpackChunkName: "contacts'" */ 'pages/ContactsPage'));
 const NotFoundPage = lazy(() => import(/* webpackChunkName: "404" */ 'pages/NotFoundPage'));
 
 const routes: RouteObject[] = [
@@ -31,8 +31,8 @@ const routes: RouteObject[] = [
     children: [
       {
         index: true,
-        path: Routes.books,
-        element: <BooksPage />,
+        path: Routes.contacts,
+        element: <ContactsPage />,
       },
       {
         path: '*',

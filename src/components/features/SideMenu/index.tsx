@@ -9,7 +9,7 @@ import { MenuItem } from 'interfaces/layout.interfaces';
 const { Item, ItemGroup } = Menu;
 
 const iconColors = {
-  [Routes.books]: '#b37feb',
+  [Routes.contacts]: '#b37feb',
 };
 
 const getTitle = (menu: MenuItem) => (

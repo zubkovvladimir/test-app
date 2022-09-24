@@ -26,7 +26,7 @@ const MainLayout: FC = () => {
 
   useEffect(() => {
     if (pathname === Routes.main) {
-      navigate(Routes.books);
+      navigate(Routes.contacts);
     }
   }, [pathname]);
 

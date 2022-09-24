@@ -25,7 +25,7 @@ import { PageTitle } from 'components/shared/PageTitle';
 import { appName } from 'constants/app';
 import { fetchContacts } from 'store/contacts/actions';
 
-const BooksPage: React.FC = () => {
+const ContactsPage: React.FC = () => {
   // const [id, setId] = React.useState<number>(SHOP_ITEM_MODAL_DEFAULT_ID);
   const dispatch = useDispatch();
   const outlet = useOutlet();
@@ -85,4 +85,4 @@ const BooksPage: React.FC = () => {
   );
 };
 
-export default BooksPage;
+export default ContactsPage;

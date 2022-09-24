@@ -8,12 +8,12 @@ export const navItems: MenuItem[] = [
   {
     name: 'Разделы',
     icon: EmptyIcon,
-    path: Routes.goods,
+    path: Routes.main,
     children: [
       {
-        name: 'Книги',
+        name: 'Контакты',
         icon: Book,
-        path: Routes.books,
+        path: Routes.contacts,
       },
     ],
   },
