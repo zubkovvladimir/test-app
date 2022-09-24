@@ -1,7 +1,7 @@
 import { authEndpoints as auth } from 'api/endpoints/auth';
-import { booksEndpoints as books } from 'api/endpoints/books';
+import { contactsEndpoints as contacts } from 'api/endpoints/contacts';
 
 export const endpoints = {
   auth,
-  books,
+  contacts,
 };

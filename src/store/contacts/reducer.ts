@@ -1,19 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { defaultPageMeta } from 'constants/other';
-import { Book } from 'interfaces/api/books.interface';
+import { Contact } from 'interfaces/api/contacts.interface';
 import { PageMeta } from 'interfaces/api/response.interfaces';
 
-import { fetchBooks } from './actions';
+import { fetchContacts } from './actions';
 
-interface BooksState {
+interface ContactState {
   isLoading: boolean;
-  items: Book[];
+  items: Contact[];
   meta: PageMeta;
   error: string | null;
-  current: Book | null;
+  current: Contact | null;
 }
 
-const initialState: BooksState = {
+const initialState: ContactState = {
   isLoading: false,
   items: [],
   meta: defaultPageMeta,
@@ -21,16 +21,16 @@ const initialState: BooksState = {
   current: null,
 };
 
-export const booksReducer = createReducer(initialState, (builder) => {
+export const contactssReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(fetchBooks.pending, (state) => {
+    .addCase(fetchContacts.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(fetchBooks.rejected, (state, { payload }) => {
+    .addCase(fetchContacts.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload as string;
     })
-    .addCase(fetchBooks.fulfilled, (state, { payload }) => {
+    .addCase(fetchContacts.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.items = payload;
       state.error = null;

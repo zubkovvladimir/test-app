@@ -23,7 +23,7 @@ import { PageTitle } from 'components/shared/PageTitle';
 // import { SHOP_ITEM_MODAL_DEFAULT_ID, ShopItemModal } from './ShopItemModal';
 // import { Table } from './Table';
 import { appName } from 'constants/app';
-import { fetchBooks } from 'store/books/actions';
+import { fetchContacts } from 'store/contacts/actions';
 
 const BooksPage: React.FC = () => {
   // const [id, setId] = React.useState<number>(SHOP_ITEM_MODAL_DEFAULT_ID);
@@ -48,7 +48,7 @@ const BooksPage: React.FC = () => {
   // };
 
   useEffect(() => {
-    dispatch(fetchBooks({}));
+    dispatch(fetchContacts({}));
 
     return () => {
       // debouncedSearch.cancel();
@@ -57,7 +57,7 @@ const BooksPage: React.FC = () => {
     };
   }, []);
 
-  useTitle(`${appName} | Книги`);
+  useTitle(`${appName} | Контакты`);
 
   if (outlet) {
     return outlet;
@@ -65,7 +65,7 @@ const BooksPage: React.FC = () => {
 
   return (
     <div>
-      <PageTitle>Книги</PageTitle>
+      <PageTitle>Контакты</PageTitle>
 
       {/* <PageHeader
         isLoading={isLoading}

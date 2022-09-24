@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { DeleteOutlined, EditOutlined, MoreOutlined } from '@ant-design/icons';
 import { Table as AntTable, Popconfirm, Space, TablePaginationConfig, Tooltip } from 'antd';
-import { Book } from 'interfaces/api/books.interface';
+import { Contact } from 'interfaces/api/contacts.interface';
 import { PageMeta } from 'interfaces/api/response.interfaces';
 // import { changeShopPageTable, fetchDeleteBookItem } from 'store/shop/actions';
 
@@ -11,7 +11,7 @@ const { Column } = AntTable;
 
 interface TableProps {
   isLoading: boolean;
-  data: Book[];
+  data: Contact[];
   meta: PageMeta;
   onEdit: (id: number) => void;
 }
@@ -34,7 +34,7 @@ export const Table: React.FC<TableProps> = React.memo(({ isLoading, data, meta, 
   };
 
   return (
-    <AntTable<Book>
+    <AntTable<Contact>
       dataSource={data}
       loading={isLoading}
       onChange={onChange}
@@ -42,10 +42,10 @@ export const Table: React.FC<TableProps> = React.memo(({ isLoading, data, meta, 
       rowKey={(item) => item.id}
       size="middle"
     >
-      <Column<Book> dataIndex="id" key="id" title="ID" />
-      <Column<Book> dataIndex="name" key="name" title="Название" />
-      <Column<Book> dataIndex="price" key="price" title="Цена (QA)" />
-      <Column<Book>
+      <Column<Contact> dataIndex="id" key="id" title="ID" />
+      <Column<Contact> dataIndex="name" key="name" title="Название" />
+      <Column<Contact> dataIndex="price" key="price" title="Цена (QA)" />
+      <Column<Contact>
         dataIndex="id"
         key="action"
         render={(id: number) => (

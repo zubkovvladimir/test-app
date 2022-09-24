@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { booksReducer as books } from './books/reducer';
+import { contactssReducer as contacts } from './contacts/reducer';
 import { profileReducer as profile } from './profile/reducer';
 
 export const rootReducer = combineReducers({
   profile,
-  books,
+  contacts,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

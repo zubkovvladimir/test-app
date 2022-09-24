@@ -1,7 +1,7 @@
 import { UniqueId } from 'interfaces/common.interfaces';
 import { NoParamEndpointConstructor, SingleParamEndpointConstructor } from 'interfaces/endpoints.interfaces';
 
-const base = '/posts' as const;
+const base = '/speakers' as const;
 
 interface Endpoints {
   list: NoParamEndpointConstructor;
@@ -10,7 +10,7 @@ interface Endpoints {
   delete: SingleParamEndpointConstructor<UniqueId>;
 }
 
-export const booksEndpoints: Endpoints = {
+export const contactsEndpoints: Endpoints = {
   list: () => base,
   create: () => base,
   update: (id) => `${base}/${id}`,

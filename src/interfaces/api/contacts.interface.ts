@@ -1,6 +1,6 @@
 // export type ShopItemType = 'physical' | 'avatar';
 
-export interface BookBase {
+export interface ContactsBase {
   name: string;
   amount: number;
   rate: number;
@@ -10,7 +10,7 @@ export interface BookBase {
   description: string;
 }
 
-export interface Book extends BookBase {
+export interface Contact extends ContactsBase {
   id: number;
 }
 

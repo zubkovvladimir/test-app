@@ -1,7 +1,7 @@
 import { authApi as auth } from './methods/auth';
-import { booksApi as books } from './methods/books';
+import { contactsApi as contacts } from './methods/contacts';
 
 export const api = {
   auth,
-  books,
+  contacts,
 };

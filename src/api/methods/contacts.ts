@@ -1,7 +1,7 @@
 import { endpoints } from 'api/endpoints';
 import { AxiosError } from 'axios';
 import { ApiErrors } from 'constants/errors';
-import { Book } from 'interfaces/api/books.interface';
+import { Contact } from 'interfaces/api/contacts.interface';
 import {
   ApiEmptyResponse,
   ApiResponse,
@@ -13,14 +13,14 @@ import {
 import { UniqueId } from 'interfaces/common.interfaces';
 import { axios } from 'utils/axios';
 
-const getList = async (params: ParamsFetchAll): ApiResponseAll<Book> => {
+const getList = async (params: ParamsFetchAll): ApiResponseAll<Contact> => {
   try {
     const formParams = { ...params };
     const { pageSize = 8, sort, search } = params;
 
     if (!params.page || Number.isNaN(params.page)) formParams.page = 1;
 
-    const res = await axios.get<Book[]>(endpoints.books.list(), {
+    const res = await axios.get<Contact[]>(endpoints.contacts.list(), {
       params: { page: params.page, limit: pageSize, sort, search },
     });
 
@@ -101,7 +101,7 @@ const getList = async (params: ParamsFetchAll): ApiResponseAll<Book> => {
 //   }
 // };
 
-export const booksApi = {
+export const contactsApi = {
   getList,
   // create,
   // update,

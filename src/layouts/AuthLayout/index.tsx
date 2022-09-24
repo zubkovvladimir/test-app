@@ -19,6 +19,9 @@ const AuthLayout: FC = () => (
         <Logo />
       </Header>
       <Content className={classes.wrapper}>
+        <p style={{ textAlign: 'center' }}>Логин: bruno@email.com</p>
+        <p style={{ textAlign: 'center' }}>Пароль: bruno</p>
+
         <Outlet />
       </Content>
       <LayoutFooter className={classes.footer}>

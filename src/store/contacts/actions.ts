@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from 'api';
-import { Book } from 'interfaces/api/books.interface';
+import { Contact } from 'interfaces/api/contacts.interface';
 import { ParamsFetchAll, ReturnFetchAll } from 'interfaces/api/response.interfaces';
 
-export const fetchBooks = createAsyncThunk<Book[], ParamsFetchAll, { rejectValue: string }>(
-  'FETCH_BOOKS',
+export const fetchContacts = createAsyncThunk<Contact[], ParamsFetchAll, { rejectValue: string }>(
+  'FETCH_CONTACTS',
   async (params, { rejectWithValue }) => {
-    const { data, errorMessage } = await api.books.getList(params);
+    const { data, errorMessage } = await api.contacts.getList(params);
 
     if (data) {
       return data;
