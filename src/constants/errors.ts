@@ -3,9 +3,7 @@ export enum ValidationErrors {
   NotNumber = 'Должно быть числом',
 }
 
-export enum ApiErrors {
-  NotFound = 'Удаленный ресурс не найден',
-  UnexpectedEntity = 'Проверьте правильность передаваемых значений',
+export enum CommonMessages {
   SomethingGoesWrong = 'Что-то пошло не так',
 }
 

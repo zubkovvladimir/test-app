@@ -1,6 +1,6 @@
 import { endpoints } from 'api/endpoints';
 import { AxiosError } from 'axios';
-import { ApiErrors } from 'constants/errors';
+import { ErrorsCode } from 'constants/errors';
 import { Contact } from 'interfaces/api/contacts.interface';
 import {
   ApiEmptyResponse,
@@ -28,13 +28,15 @@ const getList = async (params: ParamsFetchAll): ApiResponseAll<Contact> => {
 
     return { data: res.data };
   } catch (error) {
-    const errorAxios = error as AxiosError<any>;
+    const response = { errorMessage: 'Что-то пошло не так' };
+    const { response: axiosResponse } = error as AxiosError;
 
-    if (errorAxios?.response?.status === 404) {
-      return { errorMessage: ApiErrors.NotFound };
+    if (axiosResponse?.status) {
+      response.errorMessage =
+        ErrorsCode[axiosResponse?.status] ?? axiosResponse?.data?.message ?? axiosResponse?.data?.error;
     }
 
-    return { errorMessage: ApiErrors.SomethingGoesWrong };
+    return response;
   }
 };
 
