@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input, Typography } from 'antd';
+import { Button, Input, Spin, Typography } from 'antd';
 import { FormItem } from 'components/shared/FormItem';
 // import { Routes } from 'constants/routes';
 // import { useTypedSelector } from 'hooks/useTypedSelector';
@@ -16,6 +16,7 @@ import classes from './LoginPageForm.module.scss';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { Preloader } from 'components/shared/Preloader';
 import { errorsDicts } from 'constants/errors';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 const { Password } = Input;
@@ -69,9 +70,7 @@ export const LoginForm: FC = () => {
       />
 
       <Button htmlType="submit" type="primary">
-        <Preloader color="white" isLoading={isLoading} type="button">
-          Войти
-        </Preloader>
+        {isLoading ? <Spin indicator={<LoadingOutlined spin style={{ color: 'white', minWidth: 40 }} />} /> : 'Войти'}
       </Button>
     </form>
   );

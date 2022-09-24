@@ -45,8 +45,6 @@ const ContactsPage: React.FC = () => {
 
   const { isLoading, items } = useTypedSelector((state) => state.contacts);
 
-  const debouncedSearch = useDebounceFn((value: string) => console.log('sdsd'), { wait: 300 });
-
   const onCloseModal = () => {
     setId(null);
     onClose();
@@ -90,7 +88,7 @@ const ContactsPage: React.FC = () => {
       <PageHeader
         isLoading={isLoading}
         onResetFilter={() => {}}
-        onSearch={debouncedSearch.run}
+        onSearch={(value) => setParam({ search: value })}
         renderButton={
           <Button onClick={() => dispatch(onOpen())} type="primary">
             Добавить

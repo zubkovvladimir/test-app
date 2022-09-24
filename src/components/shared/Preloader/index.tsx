@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 import cx from 'classnames';
 
 import classes from './Preloader.module.scss';
@@ -16,12 +16,12 @@ interface PreloaderProps {
   style?: { readonly [key: string]: string };
 }
 
-const antIcon = <LoadingOutlined style={{ fill: 'red' }} spin />;
+const antIcon = <LoadingOutlined spin style={{ fill: 'red' }} />;
 
 export const Preloader: React.FC<PreloaderProps> = ({ isLoading, style, type, children }) =>
   isLoading ? (
     <div className={cx(classes.preloader, { [classes[type]]: type })} style={style}>
-      <Spin indicator={antIcon} style={{ color: 'white' }} />
+      <Spin />
     </div>
   ) : (
     <>{children}</>

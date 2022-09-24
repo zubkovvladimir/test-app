@@ -9,6 +9,7 @@ import { Routes } from 'constants/routes';
 import { withAuthOnly } from 'hocs/withAuthOnly';
 import './MainLayout.scss';
 import storage from 'utils/storage';
+import { Preloader } from 'components/shared/Preloader';
 
 const { Sider, Content, Footer: LayoutFooter } = Layout;
 
@@ -39,7 +40,7 @@ const MainLayout: FC = () => {
           <SideMenu />
         </Sider>
         <Content className="layout__content">
-          <Suspense fallback={<Spin />}>
+          <Suspense fallback={<Preloader color="darkBlue" isLoading type="page" />}>
             <Outlet />
           </Suspense>
         </Content>

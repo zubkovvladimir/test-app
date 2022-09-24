@@ -1,7 +1,7 @@
 import { FC, memo } from 'react';
 
-import { EditOutlined } from '@ant-design/icons';
-import { Table as AntTable, Space, TablePaginationConfig, Tooltip } from 'antd';
+import { DeleteOutlined, EditOutlined, MoreOutlined } from '@ant-design/icons';
+import { Table as AntTable, Space, TablePaginationConfig, Tooltip, Popconfirm } from 'antd';
 import { Contact } from 'interfaces/api/contacts.interface';
 import { PageMeta } from 'interfaces/api/response.interfaces';
 
@@ -50,8 +50,22 @@ export const Table: FC<TableProps> = memo(({ isLoading, data, meta, onEditModalO
             <Tooltip title="Редактировать">
               <EditOutlined onClick={() => onEditModalOpen(id, contact)} />
             </Tooltip>
+
+            <Popconfirm
+              cancelText="Нет"
+              okText="Да"
+              // onConfirm={() => dispatch(fetchDeleteShopItem(id))}
+              title="Вы действительно хотите удалить?"
+            >
+              <DeleteOutlined />
+            </Popconfirm>
           </Space>
         )}
+        title={
+          <Tooltip title="Действия">
+            <MoreOutlined />
+          </Tooltip>
+        }
         width={60}
       />
     </AntTable>
