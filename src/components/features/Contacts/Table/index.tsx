@@ -1,7 +1,7 @@
 import { FC, memo } from 'react';
 
 import { DeleteOutlined, EditOutlined, MoreOutlined } from '@ant-design/icons';
-import { Table as AntTable, Space, TablePaginationConfig, Tooltip, Popconfirm } from 'antd';
+import { Table as AntTable, Popconfirm, Space, TablePaginationConfig, Tooltip } from 'antd';
 import { Contact } from 'interfaces/api/contacts.interface';
 import { PageMeta } from 'interfaces/api/response.interfaces';
 
@@ -41,6 +41,7 @@ export const Table: FC<TableProps> = memo(({ isLoading, data, meta, onEditModalO
         render={({ firstName, lastName, patronymic }) => `${firstName} ${lastName} ${patronymic}`}
         title="ФИО"
       />
+      <Column<Contact> dataIndex="age" key="age" title="Возраст" />
 
       <Column<Contact>
         dataIndex="id"

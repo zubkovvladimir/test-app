@@ -1,13 +1,10 @@
 // export type ShopItemType = 'physical' | 'avatar';
 
 export interface ContactsBase {
-  name: string;
-  amount: number;
-  rate: number;
-  tags: string[];
-  cover: string;
-  author: string;
-  description: string;
+  firstName: string;
+  lastName: string;
+  patronymic: string;
+  age: number;
 }
 
 export interface Contact extends ContactsBase {

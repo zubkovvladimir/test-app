@@ -2,7 +2,7 @@ import { getPagesTotalCount } from 'utils/helpers';
 import { endpoints } from 'api/endpoints';
 import { AxiosError } from 'axios';
 import { ErrorsCode } from 'constants/errors';
-import { Contact } from 'interfaces/api/contacts.interface';
+import { Contact, ContactsBase } from 'interfaces/api/contacts.interface';
 import {
   ApiEmptyResponse,
   ApiResponse,
@@ -38,26 +38,23 @@ const getList = async (params: ParamsFetchAll): ApiResponseWithMeta<Contact> => 
   }
 };
 
-// const create = async (data: ProductToServer): ApiEmptyResponse => {
-//   try {
-//     const res = await axios.put<IEmptyResponse>(endpoints.goods.create(), data);
+const create = async (data: ContactsBase): ApiEmptyResponse => {
+  try {
+    await axios.post<IEmptyResponse>(endpoints.contacts.create(), data);
 
-//     return { success: res.data.success };
-//   } catch (error) {
-//     const errorAxios = error as AxiosError<any>;
+    return { success: true };
+  } catch (error) {
+    const response = { errorMessage: 'Что-то пошло не так' };
+    const { response: axiosResponse } = error as AxiosError;
 
-//     if (errorAxios.response) {
-//       if (errorAxios.response.status === 404) {
-//         return { errorMessage: ApiErrors.NotFound };
-//       }
-//       if (errorAxios.response.status === 422) {
-//         return { errorMessage: ApiErrors.UnexpectedEntity };
-//       }
-//     }
+    if (axiosResponse?.status) {
+      response.errorMessage =
+        ErrorsCode[axiosResponse?.status] ?? axiosResponse?.data?.message ?? axiosResponse?.data?.error;
+    }
 
-//     return { errorMessage: ApiErrors.SomethingGoesWrong };
-//   }
-// };
+    return response;
+  }
+};
 
 // const update = async (id: UniqueId, data: ProductToServer): ApiEmptyResponse => {
 //   try {
@@ -103,7 +100,7 @@ const getList = async (params: ParamsFetchAll): ApiResponseWithMeta<Contact> => 
 
 export const contactsApi = {
   getList,
-  // create,
+  create,
   // update,
   // remove,
 };

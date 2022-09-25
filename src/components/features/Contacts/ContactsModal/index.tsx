@@ -12,8 +12,9 @@ import { useTypedSelector } from 'hooks/useTypedSelector';
 // import { goodsCreateFormScheme } from 'utils/validations';
 
 import { ModalForm } from '../ModalForm';
-import { Contact } from 'interfaces/api/contacts.interface';
-import { fetchContacts } from 'store/contacts/actions';
+import { Contact, ContactsBase } from 'interfaces/api/contacts.interface';
+import { createContact, fetchContacts } from 'store/contacts/actions';
+import { contactsFormScheme } from 'utils/validations';
 
 export const GOODS_MODAL_DEFAULT_ID = -1 as const;
 
@@ -31,8 +32,8 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
 
   const isEditModal = id !== null;
 
-  const form = useForm<Contact>({
-    // resolver: yupResolver(goodsCreateFormScheme),
+  const form = useForm<ContactsBase>({
+    resolver: yupResolver(contactsFormScheme),
   });
   const { handleSubmit, setValue } = form;
 
@@ -41,13 +42,13 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
     onClose();
   };
 
-  // const onConfirm: SubmitHandler<ProductToServer> = (data) => {
-  //   if (isEditModal && id) {
-  //     dispatch(updateProduct({ id, data, onSuccess }));
-  //   } else {
-  //     dispatch(createProduct({ data, onSuccess }));
-  //   }
-  // };
+  const onConfirm: SubmitHandler<ContactsBase> = (data) => {
+    if (isEditModal && id) {
+      // dispatch(updateProduct({ id, data, onSuccess }));
+    } else {
+      dispatch(createContact({ data, onSuccess }));
+    }
+  };
 
   const loadContacts = () => {
     if (isEditModal) {
@@ -57,7 +58,7 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
 
   useEffect(() => {
     if (initial !== null) {
-      setValue('name', initial.name);
+      setValue('firstName', initial.firstName);
       // setValue('code', initial.code);
       // setValue('sort', initial.sort);
       // setValue('colorId', initial.color.id);
@@ -101,7 +102,7 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
                   Удалить
                 </Button>
               )}
-              <Button size="large" type="primary">
+              <Button onClick={handleSubmit(onConfirm)} size="large" type="primary">
                 {isEditModal ? 'Сохранить' : 'Создать'}
               </Button>
             </Space>

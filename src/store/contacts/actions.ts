@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from 'api';
-import { Contact } from 'interfaces/api/contacts.interface';
+import { Contact, ContactsBase } from 'interfaces/api/contacts.interface';
 import { ParamsFetchAll, ReturnFetchAll } from 'interfaces/api/response.interfaces';
 
 export const fetchContacts = createAsyncThunk<ReturnFetchAll<Contact>, ParamsFetchAll, { rejectValue: string }>(
@@ -20,26 +20,27 @@ export const fetchContacts = createAsyncThunk<ReturnFetchAll<Contact>, ParamsFet
   },
 );
 
-// export const createProduct = createAsyncThunk<
-//   boolean,
-//   { data: ProductToServer; onSuccess: () => void },
-//   { rejectValue: ErrorType }
-// >('CREATE_PRODUCT', async (params, { rejectWithValue }) => {
-//   const { data, onSuccess } = params;
+export const createContact = createAsyncThunk<
+  boolean,
+  { data: ContactsBase; onSuccess: () => void },
+  { rejectValue: string }
+>('CREATE_PRODUCT', async (params, { rejectWithValue }) => {
+  const { data, onSuccess } = params;
 
-//   const { success, errorMessage } = await api.goods.create(data);
+  const res = await api.contacts.create(data);
+  const { success, errorMessage } = res;
 
-//   if (success) {
-//     onSuccess();
-//     return success;
-//   }
+  if (success) {
+    onSuccess();
+    return success;
+  }
 
-//   if (errorMessage) {
-//     return rejectWithValue(errorMessage);
-//   }
+  if (errorMessage) {
+    return rejectWithValue(errorMessage);
+  }
 
-//   throw Error();
-// });
+  throw Error();
+});
 
 // export const updateProduct = createAsyncThunk<
 //   boolean,
