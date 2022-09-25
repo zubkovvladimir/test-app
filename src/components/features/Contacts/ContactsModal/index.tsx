@@ -18,9 +18,10 @@ interface ContactsModalModalProps {
   id: number | null;
   onClose: () => void;
   initial: Contact | null;
+  page: number;
 }
 
-export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose, initial }) => {
+export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose, initial, page }) => {
   const dispatch = useDispatch();
 
   const { isLoading, error } = useTypedSelector((state) => state.contacts);
@@ -33,7 +34,7 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
   const { handleSubmit, setValue } = form;
 
   const onSuccess = () => {
-    dispatch(fetchContacts({}));
+    dispatch(fetchContacts({ _page: page }));
     onClose();
   };
 

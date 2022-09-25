@@ -59,7 +59,9 @@ export const Table: FC<TableProps> = memo(({ isLoading, data, meta, onEditModalO
             <Popconfirm
               cancelText="Нет"
               okText="Да"
-              onConfirm={() => dispatch(deleteContact({ id, onSuccess: () => dispatch(fetchContacts({})) }))}
+              onConfirm={() =>
+                dispatch(deleteContact({ id, onSuccess: () => dispatch(fetchContacts({ _page: meta._page })) }))
+              }
               title="Вы действительно хотите удалить?"
             >
               <DeleteOutlined />

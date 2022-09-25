@@ -27,6 +27,7 @@ const ContactsPage: FC = () => {
     setId(null);
     onClose();
   };
+
   const [setParam, params] = useQueryParams({
     onChange: (params) => {
       dispatch(fetchContacts(params));
@@ -71,7 +72,7 @@ const ContactsPage: FC = () => {
         onEditModalOpen={onEditModalOpen}
       />
 
-      {isOpen && <ContactsModal id={id} initial={contact} isOpen={isOpen} onClose={onCloseModal} />}
+      {isOpen && <ContactsModal id={id} initial={contact} isOpen={isOpen} onClose={onCloseModal} page={params._page} />}
     </div>
   );
 };
