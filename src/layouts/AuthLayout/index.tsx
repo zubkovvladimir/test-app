@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom';
 import { Layout, Spin } from 'antd';
 import cx from 'classnames';
 import { Footer } from 'components/shared/Footer';
-import { Loader } from 'components/shared/Loader';
 import { Logo } from 'components/shared/Logo';
 import { withoutAuthOnly } from 'hocs/withoutAuthOnly';
 

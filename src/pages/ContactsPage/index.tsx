@@ -43,7 +43,7 @@ const ContactsPage: React.FC = () => {
   // const pageMeta = useSelector(selectShopPageMeta);
   // const open = useSelector(selectCreateShopItemModalIsOpen);
 
-  const { isLoading, items } = useTypedSelector((state) => state.contacts);
+  const { isLoading, items, totalCount } = useTypedSelector((state) => state.contacts);
 
   const onCloseModal = () => {
     setId(null);
@@ -56,8 +56,10 @@ const ContactsPage: React.FC = () => {
   //   dispatch(setSingleShopItem(null));
   // };
 
-  const setParam = useQueryParams({
-    onChange: (params) => dispatch(fetchContacts(params)),
+  const [setParam, params] = useQueryParams({
+    onChange: (params) => {
+      dispatch(fetchContacts(params));
+    },
   });
 
   const onEditModalOpen = (id: number, contact: Contact) => {
@@ -88,7 +90,7 @@ const ContactsPage: React.FC = () => {
       <PageHeader
         isLoading={isLoading}
         onResetFilter={() => {}}
-        onSearch={(value) => setParam({ search: value })}
+        onSearch={(value) => setParam({ q: value })}
         renderButton={
           <Button onClick={() => dispatch(onOpen())} type="primary">
             Добавить
@@ -99,8 +101,8 @@ const ContactsPage: React.FC = () => {
       <Table
         data={items}
         isLoading={isLoading}
-        meta={defaultPageMeta}
-        onChange={({ current, pageSize }) => setParam({ page: current, pageSize })}
+        meta={{ _page: params._page, total: totalCount, _limit: params._limit }}
+        onChange={({ current, pageSize }) => setParam({ _page: current, _limit: pageSize })}
         onEditModalOpen={onEditModalOpen}
       />
 

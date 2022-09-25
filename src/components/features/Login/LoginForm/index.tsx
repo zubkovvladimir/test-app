@@ -36,7 +36,6 @@ export const LoginForm: FC = () => {
 
   const onSubmit: SubmitHandler<LoginPayload> = (form) => {
     dispatch(login(form));
-    console.log('dffd');
   };
 
   // useEffect(() => {

@@ -7,9 +7,8 @@ export const SortDirections: Sort = {
 };
 
 export const defaultPageMeta: PageMeta = {
-  currentPage: 1,
-  lastPage: 1,
-  pageSize: 8,
+  _page: 1,
+  _limit: 8,
   total: 0,
 };
 

@@ -6,3 +6,5 @@ export const removeNullishParams = (params: Record<string, unknown>): Record<str
 
     return p;
   }, {});
+
+export const getPagesTotalCount = (totalItems: number, limit: number): number => Math.ceil(totalItems / limit);

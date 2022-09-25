@@ -6,17 +6,16 @@ export interface PageSorter {
 }
 
 export interface ParamsFetchAll {
-  page?: number;
-  pageSize?: number;
-  sort?: string;
-  sortBy?: string;
-  search?: string;
+  _page?: number;
+  _limit?: number;
+  _sort?: string;
+  _order?: string;
+  q?: string;
 }
 
 export interface PageMeta {
-  currentPage: number;
-  lastPage: number;
-  pageSize: number;
+  _page: number;
+  _limit: number;
   total: number;
 }
 
@@ -32,18 +31,18 @@ export interface IResponse<T> {
 }
 
 export interface ReturnFetchAll<T> {
-  meta: PageMeta;
+  totalCount: number;
   items: T[];
 }
 
-export interface IResponseAll<T> {
+export interface IResponseWithMeta<T> {
   success?: boolean;
   errorMessage?: string;
-  data?: T[];
+  data?: ReturnFetchAll<T>;
 }
 
 export type ApiResponse<T> = Promise<IResponse<T>>;
 
 export type ApiEmptyResponse = Promise<IEmptyResponse>;
 
-export type ApiResponseAll<T> = Promise<IResponseAll<T>>;
+export type ApiResponseWithMeta<T> = Promise<IResponseWithMeta<T>>;

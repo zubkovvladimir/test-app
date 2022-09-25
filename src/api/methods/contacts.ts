@@ -1,3 +1,4 @@
+import { getPagesTotalCount } from 'utils/helpers';
 import { endpoints } from 'api/endpoints';
 import { AxiosError } from 'axios';
 import { ErrorsCode } from 'constants/errors';
@@ -5,7 +6,7 @@ import { Contact } from 'interfaces/api/contacts.interface';
 import {
   ApiEmptyResponse,
   ApiResponse,
-  ApiResponseAll,
+  ApiResponseWithMeta,
   IEmptyResponse,
   IResponse,
   ParamsFetchAll,
@@ -13,20 +14,17 @@ import {
 import { UniqueId } from 'interfaces/common.interfaces';
 import { axios } from 'utils/axios';
 
-const getList = async (params: ParamsFetchAll): ApiResponseAll<Contact> => {
+const getList = async (params: ParamsFetchAll): ApiResponseWithMeta<Contact> => {
   try {
-    const formParams = { ...params };
-    const { pageSize = 8, sort, search } = params;
+    const { _limit = 8, _sort, q, _page = 1 } = params;
 
-    if (!params.page || Number.isNaN(params.page)) formParams.page = 1;
+    // if (!params._page || Number.isNaN(_page)) params._page = 1;
 
-    const res = await axios.get<Contact[]>(endpoints.contacts.list(), {
-      params: { page: params.page, limit: pageSize, sort, search },
+    const { headers, data } = await axios.get<Contact[]>(endpoints.contacts.list(), {
+      params: { _page, _limit, _sort, q },
     });
 
-    console.log(res);
-
-    return { data: res.data };
+    return { data: { items: data, totalCount: Number(headers['x-total-count']) } };
   } catch (error) {
     const response = { errorMessage: 'Что-то пошло не так' };
     const { response: axiosResponse } = error as AxiosError;

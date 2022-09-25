@@ -3,7 +3,7 @@ import { api } from 'api';
 import { Contact } from 'interfaces/api/contacts.interface';
 import { ParamsFetchAll, ReturnFetchAll } from 'interfaces/api/response.interfaces';
 
-export const fetchContacts = createAsyncThunk<Contact[], ParamsFetchAll, { rejectValue: string }>(
+export const fetchContacts = createAsyncThunk<ReturnFetchAll<Contact>, ParamsFetchAll, { rejectValue: string }>(
   'FETCH_CONTACTS',
   async (params, { rejectWithValue }) => {
     const { data, errorMessage } = await api.contacts.getList(params);

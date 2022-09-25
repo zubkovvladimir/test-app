@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { setIsLoggedIn } from 'store/profile/actions';

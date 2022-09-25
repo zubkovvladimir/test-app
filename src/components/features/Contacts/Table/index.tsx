@@ -22,8 +22,8 @@ export const Table: FC<TableProps> = memo(({ isLoading, data, meta, onEditModalO
     pageSizeOptions: ['10', '20', '50', '100'],
     defaultPageSize: 10,
     total: meta.total,
-    current: meta.currentPage,
-    pageSize: meta.pageSize,
+    current: meta._page,
+    pageSize: meta._limit,
   };
 
   return (

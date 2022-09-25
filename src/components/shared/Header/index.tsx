@@ -20,7 +20,7 @@ export const Header: React.FC<HeaderProps> = ({ collapsed, toggle }) => {
 
   const onLogout = () => {
     storage.clearToken();
-    dispatch(setIsLoggedIn(false));
+    // dispatch(setIsLoggedIn(false));
   };
 
   return (

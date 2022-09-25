@@ -49,9 +49,9 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
   //   }
   // };
 
-  const loadUsers = () => {
+  const loadContacts = () => {
     if (isEditModal) {
-      dispatch(fetchContacts({}));
+      // dispatch(fetchContacts({}));
     }
   };
 
@@ -79,7 +79,7 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
         {error && isEditModal ? (
           <Result
             extra={
-              <Button key="console" onClick={loadUsers} type="primary">
+              <Button key="console" onClick={loadContacts} type="primary">
                 Попробовать еще раз
               </Button>
             }
