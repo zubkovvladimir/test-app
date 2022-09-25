@@ -4,3 +4,5 @@ export enum Routes {
   goods = '/goods',
   contacts = '/contacts',
 }
+
+export type Paths = '/login' | '/goods' | '/contacts';

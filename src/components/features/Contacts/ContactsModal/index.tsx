@@ -1,22 +1,17 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Divider, Result, Space, Spin } from 'antd';
 import { Modal } from 'components/modals/Modal';
-import { CommonMessages } from 'constants/errors';
+import { commonMessages } from 'constants/errors';
 import { useTypedSelector } from 'hooks/useTypedSelector';
-// import { Product, ProductToServer } from 'interfaces/api/goods.interface';
-// import { createProduct, deleteProduct, fetchGoods, updateProduct } from 'store/goods/actions';
-// import { goodsCreateFormScheme } from 'utils/validations';
-
-import { ModalForm } from '../ModalForm';
 import { Contact, ContactsBase } from 'interfaces/api/contacts.interface';
 import { createContact, deleteContact, fetchContacts, updateContact } from 'store/contacts/actions';
 import { contactsFormScheme } from 'utils/validations';
 
-export const GOODS_MODAL_DEFAULT_ID = -1 as const;
+import { ModalForm } from '../ModalForm';
 
 interface ContactsModalModalProps {
   isOpen: boolean;
@@ -52,7 +47,7 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
 
   const loadContacts = () => {
     if (isEditModal) {
-      // dispatch(fetchContacts({}));
+      dispatch(fetchContacts({}));
     }
   };
 
@@ -83,7 +78,7 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
             }
             status="warning"
             subTitle={error}
-            title={CommonMessages.SomethingGoesWrong}
+            title={commonMessages.SomethingGoesWrong}
           />
         ) : (
           <FormProvider {...form}>

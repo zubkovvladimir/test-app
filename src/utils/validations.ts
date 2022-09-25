@@ -1,8 +1,9 @@
-import { ContactsBase } from './../interfaces/api/contacts.interface';
 import { ValidationErrors } from 'constants/errors';
 import { LoginPayload } from 'interfaces/api/profile.interfaces';
 import * as yup from 'yup';
 import type { SchemaOf } from 'yup';
+
+import { ContactsBase } from '../interfaces/api/contacts.interface';
 
 export const loginSchema: SchemaOf<LoginPayload> = yup.object().shape({
   email: yup.string().trim().required(ValidationErrors.Required),

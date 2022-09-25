@@ -11,5 +11,3 @@ export const defaultPageMeta: PageMeta = {
   _limit: 8,
   total: 0,
 };
-
-export const MaxTabsInRow = 4;

@@ -1,14 +1,14 @@
 import { FC, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Layout, Spin } from 'antd';
+import { Layout } from 'antd';
 import cx from 'classnames';
 import { Footer } from 'components/shared/Footer';
 import { Logo } from 'components/shared/Logo';
+import { Preloader } from 'components/shared/Preloader';
 import { withoutAuthOnly } from 'hocs/withoutAuthOnly';
 
 import classes from './AuthLayout.module.scss';
-import { Preloader } from 'components/shared/Preloader';
 
 const { Header, Content, Footer: LayoutFooter } = Layout;
 

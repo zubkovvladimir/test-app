@@ -2,7 +2,6 @@ import { FC, ReactElement, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import { Spin } from 'antd';
 import { Preloader } from 'components/shared/Preloader';
 import { store } from 'store';
 

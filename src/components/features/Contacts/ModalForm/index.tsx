@@ -1,14 +1,8 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { Input, InputNumber, Select, Space } from 'antd';
+import { Input, InputNumber } from 'antd';
 import { FormItem } from 'components/shared/FormItem';
-import { useTypedSelector } from 'hooks/useTypedSelector';
-
-import classes from './ModalForm.module.scss';
-
-const { Option } = Select;
-const { TextArea } = Input;
 
 export const ModalForm: React.FC = () => {
   const { control } = useFormContext();

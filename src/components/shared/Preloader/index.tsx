@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import cx from 'classnames';
 
@@ -15,8 +14,6 @@ interface PreloaderProps {
   type: PreloaderType;
   style?: { readonly [key: string]: string };
 }
-
-const antIcon = <LoadingOutlined spin style={{ fill: 'red' }} />;
 
 export const Preloader: React.FC<PreloaderProps> = ({ isLoading, style, type, children }) =>
   isLoading ? (

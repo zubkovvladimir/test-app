@@ -1,20 +1,18 @@
 import { FC, Suspense, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import { Layout, Spin } from 'antd';
+import { Layout } from 'antd';
 import { SideMenu } from 'components/features/SideMenu';
 import { Header } from 'components/shared/Header';
+import { Preloader } from 'components/shared/Preloader';
 import { Routes } from 'constants/routes';
 import { withAuthOnly } from 'hocs/withAuthOnly';
 import './MainLayout.scss';
 import storage from 'utils/storage';
-import { Preloader } from 'components/shared/Preloader';
 
-const { Sider, Content, Footer: LayoutFooter } = Layout;
+const { Sider, Content } = Layout;
 
 const MainLayout: FC = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [drawerIsCollapsed, setDrawerIsCollapsed] = useState(false);
@@ -39,6 +37,7 @@ const MainLayout: FC = () => {
         <Sider className="layout__sider" collapsed={drawerIsCollapsed} collapsible trigger={null}>
           <SideMenu />
         </Sider>
+
         <Content className="layout__content">
           <Suspense fallback={<Preloader color="darkBlue" isLoading type="page" />}>
             <Outlet />

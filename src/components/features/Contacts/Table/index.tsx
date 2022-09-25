@@ -1,11 +1,11 @@
 import { FC, memo } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { DeleteOutlined, EditOutlined, MoreOutlined } from '@ant-design/icons';
 import { Table as AntTable, Popconfirm, Space, TablePaginationConfig, Tooltip } from 'antd';
 import { Contact } from 'interfaces/api/contacts.interface';
 import { PageMeta } from 'interfaces/api/response.interfaces';
 import { deleteContact, fetchContacts } from 'store/contacts/actions';
-import { useDispatch } from 'react-redux';
 
 const { Column } = AntTable;
 
