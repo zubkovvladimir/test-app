@@ -1,5 +1,17 @@
 # test-app
 
+## Особенности
+
+NODE: 16.13.0
+
+**Учетные данные**
+
+- Логин: bruno@email.com
+- Пароль: brunomailQ!1
+
+Ссылка на сервер развернутый на Heroku: https://crudwithauth.herokuapp.com/  
+Ссылка исходный код сервера на GitHub: https://github.com/zubkovvladimir/crudwithauth
+
 ## Скрипты
 
 ##### Установка зависимостей
