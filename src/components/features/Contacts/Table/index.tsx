@@ -4,6 +4,8 @@ import { DeleteOutlined, EditOutlined, MoreOutlined } from '@ant-design/icons';
 import { Table as AntTable, Popconfirm, Space, TablePaginationConfig, Tooltip } from 'antd';
 import { Contact } from 'interfaces/api/contacts.interface';
 import { PageMeta } from 'interfaces/api/response.interfaces';
+import { deleteContact, fetchContacts } from 'store/contacts/actions';
+import { useDispatch } from 'react-redux';
 
 const { Column } = AntTable;
 
@@ -16,6 +18,8 @@ interface TableProps {
 }
 
 export const Table: FC<TableProps> = memo(({ isLoading, data, meta, onEditModalOpen, onChange }) => {
+  const dispatch = useDispatch();
+
   const pagination: TablePaginationConfig = {
     size: 'default',
     showSizeChanger: true,
@@ -55,7 +59,7 @@ export const Table: FC<TableProps> = memo(({ isLoading, data, meta, onEditModalO
             <Popconfirm
               cancelText="Нет"
               okText="Да"
-              // onConfirm={() => dispatch(fetchDeleteShopItem(id))}
+              onConfirm={() => dispatch(deleteContact({ id, onSuccess: () => dispatch(fetchContacts({})) }))}
               title="Вы действительно хотите удалить?"
             >
               <DeleteOutlined />

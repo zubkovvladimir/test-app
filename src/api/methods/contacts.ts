@@ -56,51 +56,45 @@ const create = async (data: ContactsBase): ApiEmptyResponse => {
   }
 };
 
-// const update = async (id: UniqueId, data: ProductToServer): ApiEmptyResponse => {
-//   try {
-//     const res = await axios.post<IEmptyResponse>(endpoints.goods.update(id), data);
+const update = async (id: UniqueId, data: ContactsBase): ApiEmptyResponse => {
+  try {
+    await axios.put<IEmptyResponse>(endpoints.contacts.update(id), data);
 
-//     return { success: res.data.success };
-//   } catch (error) {
-//     const errorAxios = error as AxiosError<any>;
+    return { success: true };
+  } catch (error) {
+    const response = { errorMessage: 'Что-то пошло не так' };
+    const { response: axiosResponse } = error as AxiosError;
 
-//     if (errorAxios.response) {
-//       if (errorAxios.response.status === 404) {
-//         return { errorMessage: ApiErrors.NotFound };
-//       }
-//       if (errorAxios.response.status === 422) {
-//         return { errorMessage: ApiErrors.UnexpectedEntity };
-//       }
-//     }
+    if (axiosResponse?.status) {
+      response.errorMessage =
+        ErrorsCode[axiosResponse?.status] ?? axiosResponse?.data?.message ?? axiosResponse?.data?.error;
+    }
 
-//     return { errorMessage: ApiErrors.SomethingGoesWrong };
-//   }
-// };
+    return response;
+  }
+};
 
-// const remove = async (id: UniqueId): ApiEmptyResponse => {
-//   try {
-//     const res = await axios.delete<IEmptyResponse>(endpoints.goods.delete(id));
+const remove = async (id: UniqueId): ApiEmptyResponse => {
+  try {
+    await axios.delete<IEmptyResponse>(endpoints.contacts.delete(id));
 
-//     return { success: res.data.success };
-//   } catch (error) {
-//     const errorAxios = error as AxiosError<any>;
+    return { success: true };
+  } catch (error) {
+    const response = { errorMessage: 'Что-то пошло не так' };
+    const { response: axiosResponse } = error as AxiosError;
 
-//     if (errorAxios.response) {
-//       if (errorAxios.response.status === 404) {
-//         return { errorMessage: ApiErrors.NotFound };
-//       }
-//       if (errorAxios.response.status === 422) {
-//         return { errorMessage: ApiErrors.UnexpectedEntity };
-//       }
-//     }
+    if (axiosResponse?.status) {
+      response.errorMessage =
+        ErrorsCode[axiosResponse?.status] ?? axiosResponse?.data?.message ?? axiosResponse?.data?.error;
+    }
 
-//     return { errorMessage: ApiErrors.SomethingGoesWrong };
-//   }
-// };
+    return response;
+  }
+};
 
 export const contactsApi = {
   getList,
   create,
-  // update,
-  // remove,
+  update,
+  remove,
 };

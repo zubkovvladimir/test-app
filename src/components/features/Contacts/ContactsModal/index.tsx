@@ -3,7 +3,7 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Result, Space, Spin } from 'antd';
+import { Button, Divider, Result, Space, Spin } from 'antd';
 import { Modal } from 'components/modals/Modal';
 import { CommonMessages } from 'constants/errors';
 import { useTypedSelector } from 'hooks/useTypedSelector';
@@ -13,7 +13,7 @@ import { useTypedSelector } from 'hooks/useTypedSelector';
 
 import { ModalForm } from '../ModalForm';
 import { Contact, ContactsBase } from 'interfaces/api/contacts.interface';
-import { createContact, fetchContacts } from 'store/contacts/actions';
+import { createContact, deleteContact, fetchContacts, updateContact } from 'store/contacts/actions';
 import { contactsFormScheme } from 'utils/validations';
 
 export const GOODS_MODAL_DEFAULT_ID = -1 as const;
@@ -44,7 +44,7 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
 
   const onConfirm: SubmitHandler<ContactsBase> = (data) => {
     if (isEditModal && id) {
-      // dispatch(updateProduct({ id, data, onSuccess }));
+      dispatch(updateContact({ id, data, onSuccess }));
     } else {
       dispatch(createContact({ data, onSuccess }));
     }
@@ -59,12 +59,9 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
   useEffect(() => {
     if (initial !== null) {
       setValue('firstName', initial.firstName);
-      // setValue('code', initial.code);
-      // setValue('sort', initial.sort);
-      // setValue('colorId', initial.color.id);
-      // setValue('kindId', initial.kind.id);
-      // setValue('boxId', initial.box.id);
-      // setValue('gradeId', initial.grade.id);
+      setValue('lastName', initial.lastName);
+      setValue('patronymic', initial.patronymic);
+      setValue('age', initial.age);
     }
   }, [initial]);
 
@@ -92,19 +89,22 @@ export const ContactsModal: FC<ContactsModalModalProps> = ({ isOpen, id, onClose
           <FormProvider {...form}>
             <ModalForm />
 
-            <Space direction="vertical" size="large">
+            <Divider />
+
+            <Space size="large">
+              <Button onClick={handleSubmit(onConfirm)} size="large" type="primary">
+                {isEditModal ? 'Сохранить' : 'Создать'}
+              </Button>
+
               {isEditModal && id && (
                 <Button
-                  // onClick={() => dispatch(deleteProduct({ id, onSuccess }))}
+                  onClick={() => dispatch(deleteContact({ id, onSuccess }))}
                   size="large"
                   style={{ width: '100%' }}
                 >
                   Удалить
                 </Button>
               )}
-              <Button onClick={handleSubmit(onConfirm)} size="large" type="primary">
-                {isEditModal ? 'Сохранить' : 'Создать'}
-              </Button>
             </Space>
           </FormProvider>
         )}
