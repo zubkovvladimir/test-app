@@ -1,109 +1,95 @@
 import { endpoints } from 'api/endpoints';
 import { AxiosError } from 'axios';
-import { ApiErrors } from 'constants/errors';
-import { Contact } from 'interfaces/api/contacts.interface';
+import { commonMessages, ErrorsCode } from 'constants/errors';
+import { Contact, ContactsBase } from 'interfaces/api/contacts.interface';
 import {
   ApiEmptyResponse,
-  ApiResponse,
-  ApiResponseAll,
+  ApiResponseWithMeta,
   IEmptyResponse,
-  IResponse,
   ParamsFetchAll,
 } from 'interfaces/api/response.interfaces';
 import { UniqueId } from 'interfaces/common.interfaces';
 import { axios } from 'utils/axios';
 
-const getList = async (params: ParamsFetchAll): ApiResponseAll<Contact> => {
+const getList = async (params: ParamsFetchAll): ApiResponseWithMeta<Contact> => {
   try {
-    const formParams = { ...params };
-    const { pageSize = 8, sort, search } = params;
+    const { _limit = 8, _sort, q, _page = 1 } = params;
 
-    if (!params.page || Number.isNaN(params.page)) formParams.page = 1;
-
-    const res = await axios.get<Contact[]>(endpoints.contacts.list(), {
-      params: { page: params.page, limit: pageSize, sort, search },
+    const { headers, data } = await axios.get<Contact[]>(endpoints.contacts.list(), {
+      params: { _page, _limit, _sort, q },
     });
 
-    console.log(res);
-
-    return { data: res.data };
+    return { data: { items: data, totalCount: Number(headers['x-total-count']) } };
   } catch (error) {
-    const errorAxios = error as AxiosError<any>;
+    const response = { errorMessage: commonMessages.SomethingGoesWrong };
+    const { response: axiosResponse } = error as AxiosError;
 
-    if (errorAxios?.response?.status === 404) {
-      return { errorMessage: ApiErrors.NotFound };
+    if (axiosResponse?.status) {
+      response.errorMessage =
+        ErrorsCode[axiosResponse?.status] ?? axiosResponse?.data?.message ?? axiosResponse?.data?.error;
     }
 
-    return { errorMessage: ApiErrors.SomethingGoesWrong };
+    return response;
   }
 };
 
-// const create = async (data: ProductToServer): ApiEmptyResponse => {
-//   try {
-//     const res = await axios.put<IEmptyResponse>(endpoints.goods.create(), data);
+const create = async (data: ContactsBase): ApiEmptyResponse => {
+  try {
+    await axios.post<IEmptyResponse>(endpoints.contacts.create(), data);
 
-//     return { success: res.data.success };
-//   } catch (error) {
-//     const errorAxios = error as AxiosError<any>;
+    return { success: true };
+  } catch (error) {
+    const response = { errorMessage: commonMessages.SomethingGoesWrong };
+    const { response: axiosResponse } = error as AxiosError;
 
-//     if (errorAxios.response) {
-//       if (errorAxios.response.status === 404) {
-//         return { errorMessage: ApiErrors.NotFound };
-//       }
-//       if (errorAxios.response.status === 422) {
-//         return { errorMessage: ApiErrors.UnexpectedEntity };
-//       }
-//     }
+    if (axiosResponse?.status) {
+      response.errorMessage =
+        ErrorsCode[axiosResponse?.status] ?? axiosResponse?.data?.message ?? axiosResponse?.data?.error;
+    }
 
-//     return { errorMessage: ApiErrors.SomethingGoesWrong };
-//   }
-// };
+    return response;
+  }
+};
 
-// const update = async (id: UniqueId, data: ProductToServer): ApiEmptyResponse => {
-//   try {
-//     const res = await axios.post<IEmptyResponse>(endpoints.goods.update(id), data);
+const update = async (id: UniqueId, data: ContactsBase): ApiEmptyResponse => {
+  try {
+    await axios.put<IEmptyResponse>(endpoints.contacts.update(id), data);
 
-//     return { success: res.data.success };
-//   } catch (error) {
-//     const errorAxios = error as AxiosError<any>;
+    return { success: true };
+  } catch (error) {
+    const response = { errorMessage: commonMessages.SomethingGoesWrong };
+    const { response: axiosResponse } = error as AxiosError;
 
-//     if (errorAxios.response) {
-//       if (errorAxios.response.status === 404) {
-//         return { errorMessage: ApiErrors.NotFound };
-//       }
-//       if (errorAxios.response.status === 422) {
-//         return { errorMessage: ApiErrors.UnexpectedEntity };
-//       }
-//     }
+    if (axiosResponse?.status) {
+      response.errorMessage =
+        ErrorsCode[axiosResponse?.status] ?? axiosResponse?.data?.message ?? axiosResponse?.data?.error;
+    }
 
-//     return { errorMessage: ApiErrors.SomethingGoesWrong };
-//   }
-// };
+    return response;
+  }
+};
 
-// const remove = async (id: UniqueId): ApiEmptyResponse => {
-//   try {
-//     const res = await axios.delete<IEmptyResponse>(endpoints.goods.delete(id));
+const remove = async (id: UniqueId): ApiEmptyResponse => {
+  try {
+    await axios.delete<IEmptyResponse>(endpoints.contacts.delete(id));
 
-//     return { success: res.data.success };
-//   } catch (error) {
-//     const errorAxios = error as AxiosError<any>;
+    return { success: true };
+  } catch (error) {
+    const response = { errorMessage: commonMessages.SomethingGoesWrong };
+    const { response: axiosResponse } = error as AxiosError;
 
-//     if (errorAxios.response) {
-//       if (errorAxios.response.status === 404) {
-//         return { errorMessage: ApiErrors.NotFound };
-//       }
-//       if (errorAxios.response.status === 422) {
-//         return { errorMessage: ApiErrors.UnexpectedEntity };
-//       }
-//     }
+    if (axiosResponse?.status) {
+      response.errorMessage =
+        ErrorsCode[axiosResponse?.status] ?? axiosResponse?.data?.message ?? axiosResponse?.data?.error;
+    }
 
-//     return { errorMessage: ApiErrors.SomethingGoesWrong };
-//   }
-// };
+    return response;
+  }
+};
 
 export const contactsApi = {
   getList,
-  // create,
-  // update,
-  // remove,
+  create,
+  update,
+  remove,
 };

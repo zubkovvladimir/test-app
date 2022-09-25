@@ -1,48 +1,34 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
+import { LoadingOutlined } from '@ant-design/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input, Typography } from 'antd';
+import { Button, Input, Spin, Typography } from 'antd';
 import { FormItem } from 'components/shared/FormItem';
-// import { Routes } from 'constants/routes';
-// import { useTypedSelector } from 'hooks/useTypedSelector';
+import { errorsDicts } from 'constants/errors';
+import { useTypedSelector } from 'hooks/useTypedSelector';
 import { LoginPayload } from 'interfaces/api/profile.interfaces';
 import { login } from 'store/profile/actions';
 import { loginSchema } from 'utils/validations';
-
-import classes from './LoginPageForm.module.scss';
-import { useTypedSelector } from 'hooks/useTypedSelector';
-import { Preloader } from 'components/shared/Preloader';
-import { errorsDicts } from 'constants/errors';
 
 const { Title } = Typography;
 const { Password } = Input;
 
 export const LoginForm: FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const isLoading = useTypedSelector((state) => state.profile.isLoading);
-  const authError = useTypedSelector((state) => state.profile.error);
+  const { isLoading, error } = useTypedSelector((state) => state.profile);
 
-  const { control, handleSubmit, watch } = useForm<LoginPayload>({
+  const authErrorMessage = error ? errorsDicts[error] : null;
+
+  const { control, handleSubmit } = useForm<LoginPayload>({
     resolver: yupResolver(loginSchema),
   });
-  // const watchLoginData = watch(['password', 'username']);
-  const authErrorMessage = authError ? errorsDicts[authError] : null;
 
   const onSubmit: SubmitHandler<LoginPayload> = (form) => {
     dispatch(login(form));
-    console.log('dffd');
   };
-
-  // useEffect(() => {
-  //   if (authError) {
-  //     dispatch(clearProfileError());
-  //   }
-  // }, [watchLoginData]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ marginBottom: 35 }}>
@@ -69,9 +55,7 @@ export const LoginForm: FC = () => {
       />
 
       <Button htmlType="submit" type="primary">
-        <Preloader color="white" isLoading={isLoading} type="button">
-          Войти
-        </Preloader>
+        {isLoading ? <Spin indicator={<LoadingOutlined spin style={{ color: 'white', minWidth: 40 }} />} /> : 'Войти'}
       </Button>
     </form>
   );

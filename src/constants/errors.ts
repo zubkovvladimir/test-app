@@ -3,15 +3,13 @@ export enum ValidationErrors {
   NotNumber = 'Должно быть числом',
 }
 
-export enum ApiErrors {
-  NotFound = 'Удаленный ресурс не найден',
-  UnexpectedEntity = 'Проверьте правильность передаваемых значений',
-  SomethingGoesWrong = 'Что-то пошло не так',
-}
-
 export const errorsDicts: Record<string, string> = {
   'Incorrect email or password': 'Логин, почта или пароль были введены неверно',
   'The login has already been taken.': 'Этот логин уже занят',
+};
+
+export const commonMessages = {
+  SomethingGoesWrong: 'Логин, почта или пароль были введены неверно',
 };
 
 export const ErrorsCode: Record<number, string> = {

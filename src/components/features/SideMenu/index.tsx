@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Menu } from 'antd';
@@ -8,14 +8,15 @@ import { MenuItem } from 'interfaces/layout.interfaces';
 
 const { Item, ItemGroup } = Menu;
 
-const iconColors = {
+const iconColors: Record<string, string> = {
   [Routes.contacts]: '#b37feb',
 };
 
+type Paths = keyof typeof iconColors;
+
 const getTitle = (menu: MenuItem) => (
   <span style={{ display: 'flex', alignItems: 'center' }}>
-    {/* @ts-ignore */}
-    <menu.icon className="anticon" fill={iconColors[menu.path]} />
+    <menu.icon className="anticon" fill={iconColors[menu.path] as Paths} />
     <span>{menu.name}</span>
   </span>
 );
@@ -28,19 +29,18 @@ const renderSubItem = (item: MenuItem) => (
   </ItemGroup>
 );
 
-export const SideMenu: React.FC = () => {
-  const [current, setCurrent] = React.useState<string>('');
+export const SideMenu: FC = () => {
+  const [current, setCurrent] = useState<string>('');
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   const onMenuClick = (path: string) => {
-    if (path === pathname) {
-      return;
+    if (path !== pathname) {
+      navigate(path);
     }
-    navigate(path);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCurrent(pathname);
   }, [pathname]);
 

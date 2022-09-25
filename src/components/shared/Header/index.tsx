@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({ collapsed, toggle }) => {
   return (
     <Layout.Header className="layout__header">
       <div className="logo" onClick={() => navigate(Routes.main)} style={{ width: collapsed ? 80 : 200 }}>
-        <img alt="QuizArena" src={HeaderLogo} style={{ marginRight: collapsed ? '2px' : '10px' }} />
+        <img alt="test-app" src={HeaderLogo} style={{ marginRight: collapsed ? '2px' : '10px' }} />
         {!collapsed && <span>test-app</span>}
       </div>
       <div className="layout__header-main">
