@@ -3,12 +3,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Menu } from 'antd';
 import { navItems } from 'constants/paths';
+import { Routes } from 'constants/routes';
 import { MenuItem } from 'interfaces/layout.interfaces';
 
 const { Item, ItemGroup } = Menu;
 
 const iconColors: Record<string, string> = {
-  contacts: '#b37feb',
+  [Routes.contacts]: '#b37feb',
 };
 
 type Paths = keyof typeof iconColors;
