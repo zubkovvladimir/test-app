@@ -91,50 +91,6 @@
         width: 100%;
         margin-bottom: 16px;
       }
-
-      // .page-filter {
-      //   @bg-color: #f0f5ff4d;
-      //   box-sizing: border-box;
-      //   position: relative;
-      //   display: flex;
-      //   flex-direction: column;
-      //   padding: 16px 0;
-      //   margin-bottom: 16px;
-      //   background-color: @bg-color;
-      //   &::before {
-      //     content: "";
-      //     position: absolute;
-      //     left: -16px;
-      //     top: 0;
-      //     bottom: 0;
-      //     width: 16px;
-      //     background-color: @bg-color;
-      //   }
-      //   &::after {
-      //     content: "";
-      //     position: absolute;
-      //     right: -16px;
-      //     top: 0;
-      //     bottom: 0;
-      //     width: 16px;
-      //     background-color: @bg-color;
-      //   }
-      //   > :nth-child(2) {
-      //     align-self: flex-end;
-      //   }
-
-      //   &-group {
-      //     min-width: 240px;
-      //     padding-bottom: 10px;
-
-      //     &__title {
-      //       display: inline-block;
-      //       margin-bottom: 4px;
-      //     }
-
-      //     .ant-select { width: 100%; }
-      //   }
-      // }
     }
   }
 }

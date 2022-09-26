@@ -1,14 +1,13 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { defaultPageMeta } from 'constants/other';
 import { Contact } from 'interfaces/api/contacts.interface';
-import { PageMeta } from 'interfaces/api/response.interfaces';
 
 import { fetchContacts } from './actions';
 
 interface ContactState {
   isLoading: boolean;
   items: Contact[];
-  meta: PageMeta;
+  totalCount: number;
   error: string | null;
   current: Contact | null;
 }
@@ -16,7 +15,7 @@ interface ContactState {
 const initialState: ContactState = {
   isLoading: false,
   items: [],
-  meta: defaultPageMeta,
+  totalCount: defaultPageMeta.total,
   error: null,
   current: null,
 };
@@ -32,7 +31,8 @@ export const contactssReducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchContacts.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      state.items = payload;
+      state.items = payload.items;
+      state.totalCount = payload.totalCount;
       state.error = null;
     });
 });

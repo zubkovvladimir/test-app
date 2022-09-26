@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 import { FilterOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Tooltip } from 'antd';
@@ -21,7 +21,7 @@ interface PageHeaderProps {
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({ isLoading, onSearch, renderButton, filters }) => {
-  const [filterOpen, setFilterOpen] = React.useState<boolean>(false);
+  const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
   return (
     <>

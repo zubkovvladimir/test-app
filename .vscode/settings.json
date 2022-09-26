@@ -10,10 +10,5 @@
     },
     "editor.formatOnSave": true
   },
-  "cSpell.words": [
-    "ahooks",
-    "cvety",
-    "hocs",
-    "stylelint"
-  ]
+  "cSpell.words": ["ahooks", "hocs", "Popconfirm", "stylelint"]
 }

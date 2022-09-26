@@ -13,6 +13,8 @@ export function withAuthCheck<T = any>(Component: FC<T>) {
     if (token) {
       setAxiosAuthorizationToken(token);
       dispatch(setIsLoggedIn(true));
+    } else {
+      dispatch(setIsLoggedIn(false));
     }
 
     return <Component {...props} />;
