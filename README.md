@@ -9,7 +9,7 @@ NODE: 16.13.0
 - Логин: bruno@email.com
 - Пароль: brunomailQ!1
 
-Ссылка на рабочую страницу на Vercel https://test-app-five-theta.vercel.app/
+Ссылка на рабочую страницу на Vercel https://test-app-five-theta.vercel.app/  
 Ссылка на сервер развернутый на Heroku: https://crudwithauth.herokuapp.com/  
 Ссылка исходный код сервера на GitHub: https://github.com/zubkovvladimir/crudwithauth
 
